@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Button } from "../components/ui/button"
 
+
 export default function Home() {
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
@@ -14,7 +15,10 @@ export default function Home() {
           priority
         />
         <Button>
-          Teste
+          <svg className="size-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/>
+          </svg>
+          <span className="text-xl hidden font-bold lg:inline-block">EchoChat</span>
         </Button>
 
         <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
