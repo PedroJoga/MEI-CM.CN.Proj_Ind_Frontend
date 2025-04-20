@@ -1,3 +1,4 @@
+"use client"
 import React from 'react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
@@ -26,8 +27,9 @@ const transitionVariants = {
 
 export default function Home() {
     return (
+           
         <>
-            
+             
             <main className="overflow-hidden">
                 <div
                     aria-hidden

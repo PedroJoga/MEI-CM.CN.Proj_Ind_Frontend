@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { cn } from "../lib/utils"
-import { Header } from "@/components/header";
-import { ThemeProvider } from "@/components/theme-provider";
 import FooterSection from "@/components/footer";
+import { Providers } from "@/app/providers";
+import { Header } from "@/components/header";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,22 +29,17 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={cn("min-h-screen flex flex-col", 
-          geistSans.variable, 
+        className={cn("min-h-screen flex flex-col",
+          geistSans.variable,
           geistMono.variable,
           "antialiased"
         )}>
-                      <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            
-        <Header />
+
+        <Providers>
+          <Header />
           {children}
           <FooterSection />
-        </ThemeProvider>
+        </Providers>
       </body>
     </html>
   );
