@@ -80,7 +80,7 @@ export default function Home() {
                                             asChild
                                             size="lg"
                                             className="rounded-xl px-5 text-base">
-                                            <Link href="#link">
+                                            <Link href="chat">
                                                 <span className="text-nowrap">Start now</span>
                                             </Link>
                                         </Button>

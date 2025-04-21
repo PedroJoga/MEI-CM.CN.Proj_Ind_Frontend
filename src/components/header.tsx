@@ -7,6 +7,19 @@ import React from 'react'
 import { ModeToggle } from "@/components/mode-toggle"
 import { AuthContext } from '@/contexts/AuthContext'
 import { useContext } from 'react'
+import {
+    Avatar,
+    AvatarFallback,
+    AvatarImage,
+} from "@/components/ui/avatar";
+import {
+    DropdownMenu,
+    DropdownMenuTrigger,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuSeparator,
+} from "@/components/ui/dropdown-menu";
+import { Label } from "@/components/ui/label";
 
 const menuItems = [
     { name: 'Chat', href: 'chat' },
@@ -15,8 +28,8 @@ const menuItems = [
 
 export const Header = () => {
     const [menuState, setMenuState] = React.useState(false)
-    const { user } = useContext(AuthContext);
- 
+    const { user, signOut } = useContext(AuthContext);
+
     return (
         <header>
             <nav
@@ -70,24 +83,50 @@ export const Header = () => {
                                     ))}
                                 </ul>
                             </div>
-                            <div className="flex w-full flex-col space-y-3 sm:flex-row sm:gap-3 sm:space-y-0 md:w-fit">
-                                <Button
-                                    asChild
-                                    variant="outline"
-                                    size="sm">
-                                    <Link href="/login">
-                                        <span>Login</span>
-                                    </Link>
-                                </Button>
-                                <Button
-                                    asChild
-                                    size="sm">
-                                    <Link href="/register">
-                                        <span>Sign Up</span>
-                                    </Link>
-                                </Button>
+                            {user ? (
+                                <div className="flex w-full flex-col space-y-3 sm:flex-row sm:gap-3 sm:space-y-0 md:w-fit">
+                                <Label className="hidden lg:inline-flex">
+                                    Welcome, {user.username}
+                                </Label>
+                                <DropdownMenu>
+                                    <DropdownMenuTrigger asChild>
+                                        <Avatar className="cursor-pointer h-8 w-8">
+                                            <AvatarImage src={user.avatar_url} alt={user.username} />
+                                            <AvatarFallback>{user.username[0].toUpperCase()}</AvatarFallback>
+                                        </Avatar>
+                                    </DropdownMenuTrigger>
+                                    <DropdownMenuContent align="end">
+                                        <DropdownMenuItem>
+                                            <Link href="/dashboard">
+                                                Dashboard
+                                            </Link>
+                                        </DropdownMenuItem>
+                                        <DropdownMenuSeparator />
+                                        <DropdownMenuItem onClick={() => signOut()}>
+                                            <Label className="text-red-500">
+                                                Logout
+                                            </Label>
+                                        </DropdownMenuItem>
+                                    </DropdownMenuContent>
+                                </DropdownMenu>
                                 <ModeToggle />
-                            </div>
+                                </div>
+                            ) : (
+                                <div className="flex w-full flex-col space-y-3 sm:flex-row sm:gap-3 sm:space-y-0 md:w-fit">
+                                    <Button asChild variant="outline" size="sm">
+                                        <Link href="/login">
+                                            <span>Login</span>
+                                        </Link>
+                                    </Button>
+                                    <Button asChild size="sm">
+                                        <Link href="/register">
+                                            <span>Sign Up</span>
+                                        </Link>
+                                    </Button>
+                                    <ModeToggle />
+                                </div>
+                            )}
+
                         </div>
                     </div>
                 </div>
