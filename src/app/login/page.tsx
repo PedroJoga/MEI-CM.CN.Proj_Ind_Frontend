@@ -12,10 +12,11 @@ export default function Page() {
 
   const handleLogin = async (email: string, password: string) => {
     setError("");
-    try {
-      await signIn({ email, password }, router);
-    } catch (err) {
-      console.error(err);
+    const success = await signIn({ email, password });
+
+    if (success) {
+      router.push("/dashboard");
+    } else {
       setError("Credenciais inválidas");
     }
   };

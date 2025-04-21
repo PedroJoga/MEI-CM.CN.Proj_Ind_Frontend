@@ -5,16 +5,18 @@ import { Menu, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import React from 'react'
 import { ModeToggle } from "@/components/mode-toggle"
+import { AuthContext } from '@/contexts/AuthContext'
+import { useContext } from 'react'
 
 const menuItems = [
-    { name: 'Features', href: '#link' },
-    { name: 'Solution', href: '#link' },
-    { name: 'Pricing', href: '#link' },
-    { name: 'About', href: '#link' },
+    { name: 'Chat', href: 'chat' },
+    { name: 'Dashboard', href: 'dashboard' },
 ]
 
 export const Header = () => {
     const [menuState, setMenuState] = React.useState(false)
+    const { user } = useContext(AuthContext);
+ 
     return (
         <header>
             <nav
