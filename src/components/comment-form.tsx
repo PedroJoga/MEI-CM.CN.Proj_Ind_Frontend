@@ -21,7 +21,7 @@ export default function CommentForm({ onSubmit }: CommentFormProps) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!text.trim()) {
-      setError("O comentário não pode estar vazio.")
+      setError("Comment cannot be empty.")
       return
     }
 
@@ -32,7 +32,7 @@ export default function CommentForm({ onSubmit }: CommentFormProps) {
       setText("")
       setAnonymous(false)
     } catch {
-      setError("Erro ao enviar comentário.")
+      setError("Error sending your comment.") // TODO , mensagens de erro não funcionais via props
     } finally {
       setLoading(false)
     }
@@ -47,13 +47,13 @@ export default function CommentForm({ onSubmit }: CommentFormProps) {
     >
       <Card className="p-6 shadow-md space-y-6">
         <div>
-          <Label className="text-xl font-semibold" htmlFor="msg">Seu comentário</Label>
+          <Label className="text-xl font-semibold" htmlFor="msg">Your Comment</Label>
           <Textarea
             id="msg"
             rows={5}
             value={text}
             onChange={(e) => setText(e.target.value)}
-            placeholder="Escreva algo..."
+            placeholder="Write something..."
             disabled={loading}
           />
           {error && <p className="text-sm text-red-500 mt-1">{error}</p>}
@@ -67,12 +67,12 @@ export default function CommentForm({ onSubmit }: CommentFormProps) {
             disabled={loading}
           />
           <label htmlFor="anonymous" className="text-sm">
-            Enviar anonimamente
+            Send anonymously
           </label>
         </div>
 
         <Button type="submit" disabled={loading}>
-          {loading ? "Enviando..." : "Enviar comentário"}
+          {loading ? "Sending..." : "Send a comment"}
         </Button>
       </Card>
     </motion.form>

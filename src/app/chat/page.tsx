@@ -18,6 +18,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Label } from "@/components/ui/label"
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
+import { toast } from "sonner";
 
 type Comment = {
   id: number
@@ -39,8 +40,12 @@ export default function ChatPage() {
   const [step, setStep] = useState<ChatStep.RESPONSE | ChatStep.COMMENT | ChatStep.SUCCESS>(ChatStep.RESPONSE)
 
   const loadComment = async () => {
-    const res = await api.get<Comment>("/comments/random")
-    setComment(res.data)
+    try {
+      const res = await api.get<Comment>("/comments/random")
+      setComment(res.data)
+    } catch (err) {
+      toast.error("Error to get comment. Error: " + err);
+    }
   }
 
   useEffect(() => {
@@ -57,7 +62,7 @@ export default function ChatPage() {
       })
       setShowDialog(true)
     } catch (err) {
-      console.error("Erro ao enviar resposta", err)
+      toast.error("Error to send a response. Error: " + err);
     }
   }
 
@@ -66,7 +71,7 @@ export default function ChatPage() {
       await api.post("/comments", { text, anonymous })
       setStep(ChatStep.SUCCESS)
     } catch (err) {
-      console.error("Erro ao enviar comentário", err)
+      toast.error("Error to send a comment. Error: " + err)
     }
   }
 
@@ -101,22 +106,22 @@ export default function ChatPage() {
           </Card>
         )}
 
-        {step === ChatStep.RESPONSE && (
+        {step === ChatStep.RESPONSE && comment && (
           <ResponseForm onSubmit={handleSendResponse} />
         )}
 
         <AlertDialog open={showDialog} onOpenChange={setShowDialog}>
           <AlertDialogContent>
             <AlertDialogHeader>
-              <AlertDialogTitle>Resposta enviada!</AlertDialogTitle>
+              <AlertDialogTitle>Response sent</AlertDialogTitle>
               <AlertDialogDescription>
-                Sua resposta foi enviada com sucesso. Agora você pode deixar um comentário.
+                Your response has been sent successfully. You can now leave a comment.
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>
               <AlertDialogAction
                 onClick={() => setStep(ChatStep.COMMENT)}>
-                Continuar
+                Continue
               </AlertDialogAction>
             </AlertDialogFooter>
           </AlertDialogContent>
@@ -136,9 +141,9 @@ export default function ChatPage() {
           >
             <Card className="p-6 shadow-md space-y-6 text-center">
               <h2 className="text-xl font-semibold text-green-600">
-                Comentário enviado com sucesso! 🎉
+                Comment sent successfully.
               </h2>
-              <Button onClick={handleReset}>Enviar outro comentário</Button>
+              <Button onClick={handleReset}>Reply to another user</Button>
             </Card>
           </motion.div>
           )}

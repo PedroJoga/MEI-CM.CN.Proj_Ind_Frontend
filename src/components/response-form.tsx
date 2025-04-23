@@ -32,7 +32,7 @@ export default function ResponseForm({ onSubmit }: ResponseFormProps) {
       setText("")
       setAnonymous(false)
     } catch {
-      setError("Ocorreu um erro ao enviar.")
+      setError("Error sending your response.")  // TODO , mensagens de erro não funcionais via props
     } finally {
       setLoading(false)
     }
@@ -47,13 +47,13 @@ export default function ResponseForm({ onSubmit }: ResponseFormProps) {
     >
       <Card className="p-6 shadow-md space-y-6">
         <div>
-          <Label className="text-xl font-semibold" htmlFor="msg">Sua resposta</Label>
+          <Label className="text-xl font-semibold" htmlFor="msg">Your Response</Label>
           <Textarea
             id="msg"
             rows={5}
             value={text}
             onChange={(e) => setText(e.target.value)}
-            placeholder="Escreva sua resposta..."
+            placeholder="Write your answer..."
             disabled={loading}
           />
           {error && <p className="text-sm text-red-500 mt-1">{error}</p>}
@@ -67,12 +67,12 @@ export default function ResponseForm({ onSubmit }: ResponseFormProps) {
             disabled={loading}
           />
           <label htmlFor="anonymous" className="text-sm">
-            Enviar anonimamente
+            Send anonymously
           </label>
         </div>
 
         <Button type="submit" disabled={loading}>
-          {loading ? "Enviando..." : "Enviar resposta"}
+          {loading ? "Sending..." : "Send a response"}
         </Button>
       </Card>
     </motion.form>
