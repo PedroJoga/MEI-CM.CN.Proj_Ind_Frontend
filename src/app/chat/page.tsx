@@ -87,8 +87,8 @@ export default function ChatPage() {
 
         
         {step === ChatStep.RESPONSE && comment && (
-          <Card>
-            <CardContent className="pt-6 pb-4 space-y-4">
+          <Card className="mb-8 mt-10">
+            <CardContent className="space-y-4">
               <div className="flex items-start gap-4">
                 <Avatar>
                   <AvatarImage src={comment.userPhotoLink} />

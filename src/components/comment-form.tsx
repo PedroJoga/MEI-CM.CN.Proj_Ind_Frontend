@@ -45,9 +45,9 @@ export default function CommentForm({ onSubmit }: CommentFormProps) {
       transition={{ duration: 0.3 }}
       onSubmit={handleSubmit}
     >
-      <Card className="p-6 shadow-md space-y-6">
+      <Card className="p-6 shadow-md mt-10">
         <div>
-          <Label className="text-xl font-semibold" htmlFor="msg">Your Comment</Label>
+          <Label className="text-xl font-semibold pb-4" htmlFor="msg">Your Comment</Label>
           <Textarea
             id="msg"
             rows={5}
