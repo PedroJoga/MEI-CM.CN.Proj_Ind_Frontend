@@ -3,27 +3,6 @@ import React from 'react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { TextEffect } from '@/components/ui/text-effect'
-import { AnimatedGroup } from '@/components/ui/animated-group'
-
-const transitionVariants = {
-    item: {
-        hidden: {
-            opacity: 0,
-            filter: 'blur(12px)',
-            y: 12,
-        },
-        visible: {
-            opacity: 1,
-            filter: 'blur(0px)',
-            y: 0,
-            transition: {
-                type: 'spring',
-                bounce: 0.3,
-                duration: 1.5,
-            },
-        },
-    },
-}
 
 export default function Home() {
     return (
@@ -59,33 +38,16 @@ export default function Home() {
                                     className="mt-8 max-w-2xl text-pretty text-lg">
                                     EchoChat is a simple, anonymous platform where users answer questions from others and pass their own forward—sparking a continuous chain of thoughtful, unexpected dialogue.
                                 </TextEffect>
-
-                                <AnimatedGroup
-                                    variants={{
-                                        container: {
-                                            visible: {
-                                                transition: {
-                                                    staggerChildren: 0.05,
-                                                    delayChildren: 0.75,
-                                                },
-                                            },
-                                        },
-                                        ...transitionVariants,
-                                    }}
-                                    className="mt-12 flex items-center gap-2">
-                                    <div
-                                        key={1}
-                                        className="bg-foreground/10 rounded-[calc(var(--radius-xl)+0.125rem)] border p-0.5">
-                                        <Button
-                                            asChild
-                                            size="lg"
-                                            className="rounded-xl px-5 text-base">
-                                            <Link href="chat">
-                                                <span className="text-nowrap">Start now</span>
-                                            </Link>
-                                        </Button>
-                                    </div>
-                                </AnimatedGroup>
+                                <div className="mt-8">
+                                    <Button
+                                        asChild
+                                        size="lg"
+                                        className="rounded-xl px-5 text-base animate-[scaleUp_1s_ease-in-out]">
+                                        <Link href="chat">
+                                            <span className="text-nowrap">Start now</span>
+                                        </Link>
+                                    </Button>
+                                </div>
                             </div>
                         </div>
                     </div>

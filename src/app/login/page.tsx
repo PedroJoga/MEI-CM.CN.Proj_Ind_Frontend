@@ -15,7 +15,8 @@ export default function Page() {
     const success = await signIn({ email, password });
 
     if (success) {
-      router.push("/dashboard");
+      router.refresh();
+      router.push("/dashboard"); // not needed
     } else {
       setError("Credenciais inválidas");
     }

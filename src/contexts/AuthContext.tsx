@@ -115,7 +115,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
   function signOut() {
     destroyCookie(undefined, "echochat.token");
     setUser(null);
-    router.push("/login");
+    router.refresh();
+    //router.push("/login"); // not needed
   }
 
   return (
